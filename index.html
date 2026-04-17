@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Hina</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+overflow:hidden;
+background:#ffc0cb;
+color:white;
+}
+
+/* Pages */
+.page{
+width:100%;
+height:100vh;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+position:relative;
+padding:20px;
+overflow:hidden;
+}
+
+.active{
+display:flex;
+}
+
+/* Hearts */
+.hearts{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+overflow:hidden;
+z-index:1;
+}
+
+.hearts span{
+position:absolute;
+top:-10%;
+font-size:22px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px) rotate(0deg);}
+100%{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* Start Button */
+.start-btn{
+padding:18px 28px;
+font-size:22px;
+border:none;
+border-radius:50px;
+background:#ff4d6d;
+color:white;
+cursor:pointer;
+box-shadow:0 0 20px rgba(255,0,90,.4);
+animation:pulse 2s infinite;
+z-index:5;
+text-align:center;
+max-width:90%;
+}
+
+@keyframes pulse{
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.08);}
+}
+
+/* Content */
+.content{
+width:100%;
+max-width:1000px;
+padding:20px;
+z-index:5;
+position:relative;
+}
+
+h1{
+font-size:38px;
+text-align:center;
+margin-bottom:20px;
+animation:float 3s infinite ease-in-out;
+text-shadow:0 0 10px #ff2e63;
+}
+
+@keyframes float{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+}
+
+.message{
+background:rgba(255,255,255,.15);
+padding:28px;
+border-radius:25px;
+line-height:1.8;
+font-size:19px;
+backdrop-filter:blur(8px);
+text-align:center;
+animation:wave 3s infinite ease-in-out;
+}
+
+@keyframes wave{
+0%,100%{transform:rotate(0deg);}
+50%{transform:rotate(.7deg);}
+}
+
+/* Photos */
+.photo1,.photo2{
+position:absolute;
+width:180px;
+height:220px;
+object-fit:cover;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.25);
+animation:float 4s infinite ease-in-out;
+z-index:6;
+}
+
+.photo1{
+top:30px;
+left:20px;
+}
+
+.photo2{
+right:20px;
+top:45%;
+transform:translateY(-50%);
+}
+
+/* Balloons */
+.balloon{
+position:absolute;
+top:-100px;
+font-size:45px;
+animation:drop linear forwards;
+z-index:4;
+}
+
+@keyframes drop{
+0%{top:-100px;}
+100%{top:110vh;}
+}
+
+/* Mobile Responsive */
+@media(max-width:768px){
+
+.content{
+max-width:100%;
+padding:10px;
+}
+
+h1{
+font-size:28px;
+}
+
+.message{
+font-size:15px;
+padding:18px;
+line-height:1.7;
+}
+
+.photo1,.photo2{
+width:110px;
+height:140px;
+}
+
+.photo1{
+top:15px;
+left:8px;
+}
+
+.photo2{
+right:8px;
+top:68%;
+}
+
+.start-btn{
+font-size:18px;
+padding:14px 18px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+<div class="hearts" id="hearts1"></div>
+
+<button class="start-btn" onclick="openGift()">
+🎀 Happy Birthday Prettiest Girl 🎀
+</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+<div class="hearts" id="hearts2"></div>
+
+<img src="IMG_0732.png" class="photo1">
+<img src="IMG_073.png" class="photo2">
+
+<div class="content">
+<h1>🎂 Happy Birthday Hina 🎂🎉</h1>
+
+<div class="message">
+Honestly, even if I say this a hundred times, it still wouldn’t be enough—you’re really special. 💖  
+I hope this year brings you happiness, peace, and everything you’ve been wishing for. ✨💫  
+<br><br>
+
+And not gonna lie… you somehow keep getting prettier every time I see you  
+(I don’t know how that’s even fair 😭).  
+<br><br>
+
+Enjoy your day, eat a lot of cake, take a million pictures—and yeah, I’ll be waiting to see them because you already know they’re going to look amazing. 📸🎂💕
+</div>
+</div>
+
+</div>
+
+<script>
+
+/* Hearts */
+function createHearts(id){
+let box=document.getElementById(id);
+
+for(let i=0;i<30;i++){
+let heart=document.createElement("span");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"%";
+heart.style.animationDuration=(4+Math.random()*6)+"s";
+heart.style.animationDelay=Math.random()*4+"s";
+heart.style.fontSize=(18+Math.random()*15)+"px";
+box.appendChild(heart);
+}
+}
+
+createHearts("hearts1");
+createHearts("hearts2");
+
+/* Open Gift */
+function openGift(){
+document.getElementById("page1").classList.remove("active");
+document.getElementById("page2").classList.add("active");
+
+balloons();
+}
+
+/* Balloons */
+function balloons(){
+for(let i=0;i<25;i++){
+let b=document.createElement("div");
+b.className="balloon";
+b.innerHTML="🎈";
+b.style.left=Math.random()*100+"%";
+b.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(b);
+
+setTimeout(()=>{b.remove();},8000);
+}
+}
+
+</script>
+
+</body>
+</html>
